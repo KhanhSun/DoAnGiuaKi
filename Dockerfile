@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Cài đặt dependencies
-WORKDIR /app/backend
+WORKDIR /app/mini_web/backend
 RUN npm install
 
 # Lắng nghe cổng
