@@ -1,0 +1,23 @@
+<div class="row mt-4">
+    <!-- Danh mục -->
+    <div class="col-md-4">
+        <h4>📂 Danh mục</h4>
+        <form id="createCategoryForm" class="mb-3">
+            <input type="text" id="nameInput" class="form-control mb-2" placeholder="Tên danh mục" required />
+            <input type="text" id="slugInput" class="form-control mb-2" placeholder="Slug (tuỳ chọn)" />
+            <button type="submit" class="btn btn-primary w-100">Tạo danh mục</button>
+        </form>
+        <ul id="categoryList" class="list-group"></ul>
+    </div>
+
+    <!-- Danh sách Item -->
+    <div class="col-md-8">
+        <div class="h4 col-md-8 d-flex justify-content-between align-items-center">
+            📝 Danh sách Item
+            <div>
+                <button id="addItemBtn" class="btn btn-success btn-sm mx-1">Thêm</button>
+            </div>
+        </div>
+        <ul id="itemsList" class="list-group"></ul>
+    </div>
+</div>

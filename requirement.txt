@@ -1,0 +1,3 @@
+npm install passport passport-google-oauth20
+
+text:postgresql://dka12345:5NkYg6smATwV7OBLapeSEyrm0w6EYoPb@dpg-d21lobfdiees73dvsclg-a/dbmid
