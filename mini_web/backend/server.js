@@ -5,6 +5,10 @@ const pool = require("./db");
 require("./db");
 require("dotenv").config();
 
+//được thêm
+console.log("CALLBACK:", process.env.GOOGLE_CALLBACK_URL);
+//
+
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
@@ -26,6 +30,19 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+// Session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "default-secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.get("/session-test", (req, res) => {
+  req.session.count = (req.session.count || 0) + 1;
+  res.send(`Bạn đã truy cập ${req.session.count} lần`);
+});
 
 // Passport cấu hình session
 app.use(passport.initialize());
@@ -53,6 +70,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
+      scope: ["profile", "email"], // ⚠️ PHẢI CÓ
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -92,6 +110,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 
 // Serve static files from the frontend directory
 const frontendPath = path.join(__dirname, "../frontend");

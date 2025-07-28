@@ -11,11 +11,17 @@ router.get("/me", authController.me);
 
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
+
 router.get(
     "/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
-        // Đăng nhập thành công, chuyển hướng về trang chính hoặc dashboard
+        const { id, displayName, emails } = req.user;
+        req.session.user = {
+            id,
+            username: displayName || emails?.[0]?.value || "bạn",
+        };
+        console.log("SESSION USER:", req.session.user);
         res.redirect("/");
     }
 );
